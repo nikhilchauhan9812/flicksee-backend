@@ -68,7 +68,7 @@ User.findOne({email:req.body.email}).then(user=>{
       subject:'password reset',
       html:`
       <p>You requested for password reset</p>
-      <h4>click on this <a href='http://localhost:3000/resetpassword/${token}'>link</a> to reset the password</h4>
+      <h4>click on this <a href='https://flicksee.vercel.app/resetpassword/${token}'>link</a> to reset the password</h4>
       `
     })
     res.json({message:'Please check your email to reset your password!'})
