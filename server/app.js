@@ -2,11 +2,14 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const { mongoURI } = require("./config/key");
+
+const cors = require("cors");
 const app = express();
 const PORT = process.env.PORT || 5000
 app.get("/", (req, res) => {
   res.send("hello world");
 })
+app.use(cors());
 mongoose.connect(mongoURI);
 
 mongoose.connection.on("connected", () => {
