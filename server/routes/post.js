@@ -69,20 +69,13 @@ router.delete('/deletepost/:postId', requirelogin, (req, res) => {
       if (post.postedby._id.toString() === req.user._id.toString()) {
         Post.deleteOne({ _id: req.params.postId })
           .then(result => {
-            Post.find()
-              .populate("postedby", "_id name")
-              .then(posts => {
-                res.json({ posts });
-              })
-              .catch(err => {
-                console.log(err);
-                res.status(500).json({ error: "Error fetching posts" });
-              });
+            Post.find({ postedby: req.user._id })
+            
+            .then((mypost) => {
+              res.json({ mypost });
+            });
           })
-          .catch(err => {
-            console.log(err);
-            res.status(500).json({ error: "Error deleting post" });
-          });
+          
       } else {
         res.status(403).json({ error: "You are not authorized to delete this post" });
       }
